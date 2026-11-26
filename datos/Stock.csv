@@ -1,0 +1,23 @@
+sku,marca,modelo,medida,tipo_vehiculo,indice_carga,indice_velocidad,precio_soles,stock,almacen
+TC-1756514,Trayecto,City,175/65 R14,auto,82,T,189,24,Lima Centro
+TC-1856515,Trayecto,City,185/65 R15,auto,88,H,219,32,Lima Centro
+TC-1956015,Trayecto,City,195/60 R15,auto,88,V,235,16,Lima Centro
+TC-2055516,Trayecto,City,205/55 R16,auto,91,V,279,20,Ate
+TC-2155017,Trayecto,City,215/50 R17,auto,95,V,345,0,Ate
+KE-1557013,Kumbre,Eco,155/70 R13,auto,75,T,139,40,Lima Centro
+KE-1756514,Kumbre,Eco,175/65 R14,auto,82,T,159,36,Lima Centro
+KE-1856515,Kumbre,Eco,185/65 R15,auto,88,T,179,12,Ate
+KE-2055516,Kumbre,Eco,205/55 R16,auto,91,H,229,8,Ate
+TH-2156516,Trayecto,HT,215/65 R16,suv,98,H,369,14,Ate
+TH-2256517,Trayecto,HT,225/65 R17,suv,102,H,419,10,Ate
+TH-2357016,Trayecto,HT,235/70 R16,camioneta,106,T,429,6,Lima Centro
+TA-2657016,Trayecto,AT,265/70 R16,camioneta 4x4,112,T,529,18,Ate
+TA-2656517,Trayecto,AT,265/65 R17,camioneta 4x4,112,T,569,12,Ate
+TA-2457516,Trayecto,AT,245/75 R16,camioneta 4x4,111,S,499,0,Ate
+KT-2657016,Kumbre,Trail,265/70 R16,camioneta 4x4,112,S,459,22,Lima Centro
+KT-2656517,Kumbre,Trail,265/65 R17,camioneta 4x4,112,S,489,9,Lima Centro
+KM-2657517,Kumbre,Mud,265/75 R16,camioneta 4x4,123,Q,599,4,Ate
+TG-1957516C,Trayecto,Cargo,195/75 R16C,carga liviana,107,R,389,15,Ate
+TG-2157516C,Trayecto,Cargo,215/75 R16C,carga liviana,113,R,429,10,Ate
+KP-2958022,Kumbre,Pro Direccion,295/80 R22.5,camion,152,M,1450,8,Ate
+KP-2958022T,Kumbre,Pro Traccion,295/80 R22.5,camion,152,M,1520,12,Ate

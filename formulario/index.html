@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consultas – RutaSur Neumáticos (demo)</title>
+<style>
+  body { font-family: system-ui, sans-serif; background: #f2f4f7; margin: 0; padding: 32px 16px; color: #1d2433; }
+  .card { max-width: 560px; margin: auto; background: #fff; border-radius: 12px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+  h1 { font-size: 22px; margin: 0 0 4px; } p.sub { color: #5b6475; margin: 0 0 20px; }
+  label { display: block; font-weight: 600; font-size: 14px; margin: 14px 0 6px; }
+  input, textarea { width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1px solid #cfd5df; border-radius: 8px; font: inherit; }
+  textarea { min-height: 120px; resize: vertical; }
+  button { margin-top: 18px; width: 100%; padding: 12px; border: 0; border-radius: 8px; background: #1f4e78; color: #fff; font-weight: 600; font-size: 15px; cursor: pointer; }
+  button:disabled { opacity: .6; cursor: wait; }
+  #resultado { margin-top: 20px; white-space: pre-wrap; padding: 14px; border-radius: 8px; display: none; }
+  .ok { background: #eaf5ee; border: 1px solid #b7dfc4; } .err { background: #fdecec; border: 1px solid #f3b9b9; }
+  .tag { display: inline-block; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 99px; background: #1f4e78; color: #fff; margin-bottom: 8px; }
+  small { color: #5b6475; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>¿En qué le podemos ayudar?</h1>
+  <p class="sub">Consultas de medidas, precios, stock y garantías. Respuesta inmediata.</p>
+  <form id="f">
+    <label for="nombre">Nombre</label>
+    <input id="nombre" name="nombre" required>
+    <label for="email">Correo electrónico</label>
+    <input id="email" name="email" type="email" required>
+    <label for="mensaje">Consulta</label>
+    <textarea id="mensaje" name="mensaje" required placeholder="Ej.: ¿Tienen 4 llantas 205/55 R16? ¿Cuánto cuestan?"></textarea>
+    <label for="url">URL del webhook de n8n</label>
+    <input id="url" value="http://localhost:5678/webhook/consulta-neumaticos">
+    <small>Para probar sin activar el workflow usa /webhook-test/ y pulsa "Execute workflow" en n8n.</small>
+    <button id="btn" type="submit">Enviar consulta</button>
+  </form>
+  <div id="resultado"></div>
+</div>
+<script>
+  const f = document.getElementById('f'), out = document.getElementById('resultado'), btn = document.getElementById('btn');
+  f.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled = true; btn.textContent = 'Procesando...';
+    out.style.display = 'none';
+    try {
+      const res = await fetch(document.getElementById('url').value, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre: f.nombre.value, email: f.email.value, mensaje: f.mensaje.value })
+      });
+      const data = await res.json();
+      out.className = data.ok ? 'ok' : 'err';
+      out.innerHTML = '';
+      if (data.decision) { const t = document.createElement('span'); t.className = 'tag'; t.textContent = data.decision; out.appendChild(t); out.appendChild(document.createElement('br')); }
+      out.appendChild(document.createTextNode(data.respuesta || data.error || 'Sin respuesta'));
+    } catch (err) {
+      out.className = 'err';
+      out.textContent = 'No se pudo conectar con el servicio. Intente nuevamente en unos minutos.';
+    }
+    out.style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Enviar consulta';
+  });
+</script>
+</body>
+</html>
